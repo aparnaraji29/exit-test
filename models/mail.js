@@ -1,20 +1,19 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-
-const mailSchema = new Schema ({
-    email:{
-        type:String,
-        required:true
-    },
-    isLoggedIn: {
-         type: Boolean,
-          default: false
-         },
-    otp:{
-        type: String 
-    }
+mongoose.connect('mongodb+srv://aparnaraji2000:Aparna29@cluster0.bswwvwk.mongodb.net/exittest?retryWrites=true&w=majority',{
+    useNewUrlParser : true,
+    useUnifiedTopology : true
+}).then(()=>{
+    console.log('mongodb connected successfully')
 })
-    
-let mailDATA = mongoose.model('maildetails',mailSchema)
 
-module.exports = mailDATA
+const Schema = mongoose.Schema;
+
+var NewUserSchema = new Schema({
+    email: String,
+    otp:Number
+   }, {
+    versionKey: false
+   })
+
+var user = mongoose.model('user', NewUserSchema);
+module.exports = user;
