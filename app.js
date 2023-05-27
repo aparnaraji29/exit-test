@@ -19,6 +19,9 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+
+const path=require('path');
+app.use(express.static(path.join(__dirname+'/dist/frontend')));
 const otp = Math.floor(Math.random() * 1000000).toString().padStart(6, '0')
   
 function sendotp(email){
@@ -106,6 +109,13 @@ app.post('/verify-otp', async (req, res) => {
     res.json({status:"1"})
   });
 
+
+
+  console.log(path.join(__dirname + '/dist/frontend/index.html'))
+//! dont delete this code. it connects the front end file.
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname + '/dist/frontend/index.html'));
+});
 
 
 
