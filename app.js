@@ -3,16 +3,15 @@ const cors = require('cors');
 const path=require('path');
 const user = require('./models/mail');
 const nodemailer = require('nodemailer');
-// const exphbs=require('express-handlebars');
 
 const app=express();
 app.use(cors());
 app.use(express.json({urlencoded:true}));
 
-app.use(express.static('./dist/front-end'));
+app.use(express.static('./dist/frontend'));
 
 
-app.post('/api/email',(req,res)=>{
+app.post('/api/emailsend',(req,res)=>{
     res.header("Access-Control-Allow-Origin","*");
     res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE")
     const randomPin = Math.floor(1000 + Math.random() * 9000);
@@ -26,13 +25,13 @@ app.post('/api/email',(req,res)=>{
      var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-          user: 'devarajpraj369@gmail.com',
-          pass: 'odbxowidllayrlmg'
+          user: 'aparnaraji2000@gmail.com',
+          pass: 'vuerbcmndgntkbln'
       }
    });
    
    var mailOptions = {
-      from: 'devarajpraj369@gmail.com',
+      from: 'aparnaraji2000@gmail.com',
       to: data.email,
       subject: 'OTP',
       text: `OTP is ${data.otp}`
@@ -72,11 +71,11 @@ app.post('/api/email',(req,res)=>{
  })
 
   app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/dist/front-end/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/frontend/index.html'));
  });
 
 
-const PORT=process.env.PORT||3000;
+const PORT=3000;
 app.listen(PORT,()=>{
-    console.log(`server started at ${PORT}`);
+    console.log(`app is live at ${PORT}`);
 })
